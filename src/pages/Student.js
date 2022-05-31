@@ -1,4 +1,5 @@
 import { getStudents } from "../api/student";
+import { deleteStudent } from "../api/student";
 
 const Student = {
     render: async () => { // đã đóng ngoặc nhọn phải có return ở trong
@@ -26,8 +27,9 @@ const Student = {
                         <div>Name: ${student.name}</div>
                         <div>MSV: ${student.msv}</div>
                         <div>
+                            <a href="/students/${student.id}"><button class='btn btn-info'> Chi tiết </button> </a>
                             <a href="/students/${student.id}">
-                                <button class='btn btn-info'> Chi tiết </button> 
+                                <button class='btn btn-danger' onclick="${deleteStudent(student.id)}"> Xoá </button> 
                             </a>
                         </div>
                     </div>`
