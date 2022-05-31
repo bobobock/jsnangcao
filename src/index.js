@@ -2,70 +2,88 @@ import Navigo from '../node_modules/navigo';
 // import Navigo from 'navigo';
 import Header from './components/Header';
 import Footer from './components/Footer';
-
 import Home from './pages/Home';
 import About from './pages/About';
 import News from './pages/News';
 import Student from './pages/Student';
-
+import StudentDetail from './pages/StudentDetail';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//khởi tạo đối tượng router
-const router = new Navigo ('/',{linksSelector: 'a'});
 
-router.on({
-    '/': () =>render(Home.render()),
-    '/about': () =>render(About.render()),
-    '/news': () =>render(News.render()),
-    '/student': () =>render(Student.render()),
+// Khởi tạo đối tượng router
+const router = new Navigo('/', {linksSelector: 'a'});
 
-});
-router.resolve();
-
-//render();
-
-function render (content){
+const render = async (content) => {
     document.querySelector('#header').innerHTML = Header.render();
-    document.querySelector('#content').innerHTML = content;
+    document.querySelector('#content').innerHTML = await content;
     document.querySelector('#footer').innerHTML = Footer.render();
 }
 
-//arrow function: const ten_ham() =>{};
+router.on({
+    '/': () => render(Home.render()),
+    '/about': () => render(About.render()),
+    '/news': () => render(News.render()),
+    '/students': () => render(Student.render()),
+    '/students/:id': (data) => render(StudentDetail.render(data.data.id)),
+});
+router.resolve();
 
+// render();
+
+// --------------------------------
+
+
+// arrow function: const ten_ham = () => {};
 const arrowRender = () => {
-    document.querySelector('#header').innerHTML = Header.render();
+    document.querySelector('#header').innerHTML = '<div>Header</div>';
     document.querySelector('#content').innerHTML = '<div>Content</div>';
     document.querySelector('#footer').innerHTML = '<div>Footer</div>';
-}
-
-function sum(a, b)
-{return a+b;};//cú pháp thường
-const sum1 = (a,b)=>{return a+b;};//arfunction có return
-const sum2 =(a,b) => a+b;//nếu chỉ có 1 return
-const display = a =>console.log(a);//nếu chỉ có 1 tham số
-
-// const display1 = a => alert (a);
-
-// callback: hàm được truyền vào dưới dạng 1 đối số , và thực thi trong 1 hàm
-
-const abc = (print) => {
-    const result = sum(2,3);
-    print (result);
 };
 
+const s = () => 2 + 3;
+
+function sum(a, b) {
+    return a+b;
+}; // cú pháp thông thường
+const sum1 = (a, b) => {
+    return a+b;
+}; // arrow function có return
+const sum2 = (a, b) => a+b; // nếu chỉ có return
+
+const display = a => console.log(a); // nếu chỉ có 1 tham số
+const display1 = a => alert(a);
+// Callback: hàm được truyền vào dưới dạng 1 đối số, và thực thi trong 1 hàm
+
+// const abc = (print) => {
+//     const result = sum(2, 3);
+//     // có nhiều cách hiển thị khác nhau, và phải nhận kq hiển thị từ result
+//     print(result);
+//     // display(result);
+//     // display1(result);
+// };
+
+// // abc(display);
 // abc(display1);
-const loadscript = (scr,callback)=>{
+
+const loadScript = (src, callback) => {
     const scriptE = document.createElement('script');
-    scriptE.src =src;
-    scriptE.onload = () =>callback();
+    scriptE.src = src;
+    scriptE.onload = () => callback();
+};
+
+const khoitaosv = () => {
+    var sinhVien = {};
 }
 
-const khoitaosv = ()=>{
-    var sinhvien = {};
-}
+loadScript('moment.min.js', () => {
+    var sinhVien = {};
+    loadScript('https://cdn.com', () => {
+        // tinh tuoi sv
+        loadScript('https://cnd1.com', () => {
+            // 123123123
+        })
+    })
+})
 
-// loadscript ('moment.min.js',khoitaosv)
-
-// const countString = (string) => string.length;
 
 // đếm số chữ cái trong thông tin user
 const countString = (string, callback) => { // mang countString2 truyền vào
@@ -108,7 +126,7 @@ const setValueA = () => new Promise((resolve, reject) => {
             reject('bị lỗi');
         }
         // a = [1, 2, 3];
-    }, 1000);
+    }, 5000);
 });
 
 let a = [];
@@ -137,5 +155,3 @@ const printA = async () => {
 };
 
 printA();
-
-
