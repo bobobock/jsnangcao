@@ -7,23 +7,29 @@ import About from './pages/About';
 import News from './pages/News';
 import Student from './pages/Student';
 import StudentDetail from './pages/StudentDetail';
+import StudentAdd from './pages/StudentAdd';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Khởi tạo đối tượng router
 const router = new Navigo('/', {linksSelector: 'a'});
 
-const render = async (content) => {
+const render = async (content,id) => {
     document.querySelector('#header').innerHTML = Header.render();
-    document.querySelector('#content').innerHTML = await content;
-    document.querySelector('#footer').innerHTML = Footer.render();
-}
+    document.querySelector('#content').innerHTML = await content.render(id);
+    document.querySelector('#footer').innerHTML = Footer.render();  
+
+    if (content.afterRender) {
+        content.afterRender();
+    }
+};
 
 router.on({
-    '/': () => render(Home.render()),
-    '/about': () => render(About.render()),
-    '/news': () => render(News.render()),
-    '/students': () => render(Student.render()),
-    '/students/:id': (data) => render(StudentDetail.render(data.data.id)),
+    '/': () => render(Home),
+    '/about': () => render(About),
+    '/news': () => render(News),
+    '/students': () => render(Student),
+    '/students/:id': (data) => render(StudentDetail, data.data.id),
+    '/students/add': () => render(StudentAdd),
 });
 router.resolve();
 
