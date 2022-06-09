@@ -28,7 +28,10 @@ const Student = {
                         <div>MSV: ${student.msv}</div>
                         <div>
                             <a href="/students/${student.id}"><button class='btn btn-info'> Chi tiết </button> </a>
-                                <button class='btn btn-danger' data-id="${student.id}" data-name="${student.name}" > Xoá </button> 
+
+                            <a href="/students/edit/${student.id}"><button class='btn btn-warning'>Chinh sua</button></a>
+                            
+                            <button class='btn btn-danger' data-id="${student.id}" data-name="${student.name}" > Xoá </button> 
                         </div>
                     </div>`
                 )).join('')

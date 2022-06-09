@@ -19,7 +19,7 @@ const render = async (content,id) => {
     document.querySelector('#footer').innerHTML = Footer.render();  
 
     if (content.afterRender) {
-        content.afterRender();
+        content.afterRender(id);
     }
 };
 
@@ -30,6 +30,7 @@ router.on({
     '/students': () => render(Student),
     '/students/:id': (data) => render(StudentDetail, data.data.id),
     '/students/add': () => render(StudentAdd),
+    '/students/edit/:id': (data) => render(StudentAdd, data.data.id),
 });
 router.resolve();
 
