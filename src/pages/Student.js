@@ -1,5 +1,5 @@
 import { getStudents,deleteStudent } from "../api/student";
-import reRender from "../helper/reRender";
+import reRender from "../helpers/reRender";
 
 const Student = {
     render: async () => { // đã đóng ngoặc nhọn phải có return ở trong
@@ -30,7 +30,7 @@ const Student = {
                             <a href="/students/${student.id}"><button class='btn btn-info'> Chi tiết </button> </a>
 
                             <a href="/students/edit/${student.id}"><button class='btn btn-warning'>Chinh sua</button></a>
-                            
+
                             <button class='btn btn-danger' data-id="${student.id}" data-name="${student.name}" > Xoá </button> 
                         </div>
                     </div>`
@@ -56,10 +56,5 @@ const Student = {
         });
     }
 };
-
-
-
-
-
 
 export default Student;

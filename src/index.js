@@ -9,9 +9,11 @@ import Student from './pages/Student';
 import StudentDetail from './pages/StudentDetail';
 import StudentAdd from './pages/StudentAdd';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import CartDetail from './pages/CartDetail';
+import router from './helpers/router';
 
 // Khởi tạo đối tượng router
-const router = new Navigo('/', {linksSelector: 'a'});
+// const router = new Navigo('/', {linksSelector: 'a'});
 
 const render = async (content,id) => {
     document.querySelector('#header').innerHTML = Header.render();
@@ -31,6 +33,7 @@ router.on({
     '/students/:id': (data) => render(StudentDetail, data.data.id),
     '/students/add': () => render(StudentAdd),
     '/students/edit/:id': (data) => render(StudentAdd, data.data.id),
+    '/cartdetail': () => render(CartDetail),
 });
 router.resolve();
 
